@@ -44,7 +44,7 @@ class CreditCard extends Model
      */
     public function getMaskedCardNumberAttribute(): string
     {
-        return '**** **** **** ' . $this->last_four_digits;
+        return '**** **** **** '.$this->last_four_digits;
     }
 
     /**
@@ -52,7 +52,7 @@ class CreditCard extends Model
      */
     public function getFormattedExpiryAttribute(): string
     {
-        return $this->expiry_month . '/' . $this->expiry_year;
+        return $this->expiry_month.'/'.$this->expiry_year;
     }
 
     /**
@@ -100,10 +100,10 @@ class CreditCard extends Model
 
         return $query->where(function ($q) use ($currentYear, $currentMonth) {
             $q->where('expiry_year', '>', $currentYear)
-              ->orWhere(function ($subQ) use ($currentYear, $currentMonth) {
-                  $subQ->where('expiry_year', $currentYear)
-                       ->where('expiry_month', '>=', $currentMonth);
-              });
+                ->orWhere(function ($subQ) use ($currentYear, $currentMonth) {
+                    $subQ->where('expiry_year', $currentYear)
+                        ->where('expiry_month', '>=', $currentMonth);
+                });
         });
     }
 
@@ -114,9 +114,9 @@ class CreditCard extends Model
     {
         // Unset other default cards for this user
         static::where('cardable_type', $this->cardable_type)
-              ->where('cardable_id', $this->cardable_id)
-              ->where('id', '!=', $this->id)
-              ->update(['is_default' => false]);
+            ->where('cardable_id', $this->cardable_id)
+            ->where('id', '!=', $this->id)
+            ->update(['is_default' => false]);
 
         // Set this card as default
         $this->update(['is_default' => true]);

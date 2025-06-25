@@ -78,10 +78,10 @@ class HandleSuccessfulPayment
                     'amount' => number_format($paymentData['amount'] ?? 0, 2),
                     'currency' => $paymentData['currency'] ?? 'SAR',
                     'transaction_id' => $paymentData['id'] ?? '',
-                ], function ($message) use ($email, $paymentData) {
+                ], function ($message) use ($email) {
                     $message->to($email)
-                            ->subject('Payment Confirmation - ' . config('app.name'))
-                            ->from(config('mail.from.address'), config('mail.from.name'));
+                        ->subject('Payment Confirmation - '.config('app.name'))
+                        ->from(config('mail.from.address'), config('mail.from.name'));
                 });
             }
         } catch (\Exception $e) {

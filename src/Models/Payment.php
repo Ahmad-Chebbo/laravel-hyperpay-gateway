@@ -47,6 +47,7 @@ class Payment extends Model
     public static function createModel(): self
     {
         $class = self::getModelClass();
-        return new $class();
+
+        return new $class;
     }
 }

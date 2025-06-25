@@ -31,20 +31,20 @@ class HyperpayServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'hyperpay');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'hyperpay');
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__ . '/../config/hyperpay.php' => config_path('hyperpay.php'),
+                __DIR__.'/../config/hyperpay.php' => config_path('hyperpay.php'),
             ], 'hyperpay-config');
 
             $this->publishes([
-                __DIR__ . '/../database/migrations' => database_path('migrations'),
+                __DIR__.'/../database/migrations' => database_path('migrations'),
             ], 'hyperpay-migrations');
 
             $this->publishes([
-                __DIR__ . '/../resources/views' => resource_path('views/vendor/hyperpay'),
+                __DIR__.'/../resources/views' => resource_path('views/vendor/hyperpay'),
             ], 'hyperpay-views');
 
             $this->commands([
@@ -54,7 +54,7 @@ class HyperpayServiceProvider extends ServiceProvider
         }
 
         // Load routes
-        $this->loadRoutesFrom(__DIR__ . '/../routes/hyperpay.php');
+        $this->loadRoutesFrom(__DIR__.'/../routes/hyperpay.php');
 
         // Load translations
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'hyperpay');

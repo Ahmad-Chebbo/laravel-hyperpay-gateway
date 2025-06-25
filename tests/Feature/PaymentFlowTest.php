@@ -4,18 +4,12 @@ declare(strict_types=1);
 
 namespace AhmadChebbo\LaravelHyperpay\Tests\Feature;
 
-use Tests\TestCase;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
-use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\CustomerData;
-use AhmadChebbo\LaravelHyperpay\DTOs\BillingData;
+use AhmadChebbo\LaravelHyperpay\Events\PaymentSuccessful;
 use AhmadChebbo\LaravelHyperpay\Models\Payment;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
-use AhmadChebbo\LaravelHyperpay\Events\PaymentSuccessful;
-use AhmadChebbo\LaravelHyperpay\Events\PaymentFailed;
-use AhmadChebbo\LaravelHyperpay\Events\PaymentPending;
+use Tests\TestCase;
 
 class PaymentFlowTest extends TestCase
 {
@@ -39,7 +33,7 @@ class PaymentFlowTest extends TestCase
                     'id' => 'test_payment_123',
                     'result' => [
                         'code' => '000.100.110',
-                        'description' => 'Request successfully processed in \'Merchant in Integrator Test Mode\''
+                        'description' => 'Request successfully processed in \'Merchant in Integrator Test Mode\'',
                     ],
                     'amount' => '100.00',
                     'currency' => 'SAR',
@@ -52,7 +46,7 @@ class PaymentFlowTest extends TestCase
                     'id' => 'test_payment_123',
                     'result' => [
                         'code' => '000.100.110',
-                        'description' => 'Request successfully processed in \'Merchant in Integrator Test Mode\''
+                        'description' => 'Request successfully processed in \'Merchant in Integrator Test Mode\'',
                     ],
                     'amount' => '100.00',
                     'currency' => 'SAR',
@@ -73,14 +67,14 @@ class PaymentFlowTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'data' => [
-                        'checkout_id' => 'test_checkout_123',
-                        'redirect_url' => 'https://test.oppwa.com/checkout/test_checkout_123',
-                        'merchant_transaction_id' => 'order_123',
-                    ],
-                ]);
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'checkout_id' => 'test_checkout_123',
+                    'redirect_url' => 'https://test.oppwa.com/checkout/test_checkout_123',
+                    'merchant_transaction_id' => 'order_123',
+                ],
+            ]);
     }
 
     /** @test */
@@ -92,7 +86,7 @@ class PaymentFlowTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                ->assertJsonValidationErrors(['amount', 'brand']);
+            ->assertJsonValidationErrors(['amount', 'brand']);
     }
 
     /** @test */
@@ -110,15 +104,15 @@ class PaymentFlowTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'data' => [
-                        'payment_id' => 'test_payment_123',
-                        'is_successful' => true,
-                        'amount' => '100.00',
-                        'currency' => 'SAR',
-                    ],
-                ]);
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'payment_id' => 'test_payment_123',
+                    'is_successful' => true,
+                    'amount' => '100.00',
+                    'currency' => 'SAR',
+                ],
+            ]);
     }
 
     /** @test */
@@ -135,7 +129,7 @@ class PaymentFlowTest extends TestCase
         ]);
 
         $response->assertStatus(422)
-                ->assertJsonValidationErrors(['card_number', 'card_holder', 'expiry_month', 'expiry_year', 'cvv']);
+            ->assertJsonValidationErrors(['card_number', 'card_holder', 'expiry_month', 'expiry_year', 'cvv']);
     }
 
     /** @test */
@@ -144,16 +138,16 @@ class PaymentFlowTest extends TestCase
         $response = $this->getJson('/api/payment/status/test_payment_123?brand=VISA');
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'data' => [
-                        'id' => 'test_payment_123',
-                        'is_successful' => true,
-                        'amount' => '100.00',
-                        'currency' => 'SAR',
-                        'payment_brand' => 'VISA',
-                    ],
-                ]);
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'id' => 'test_payment_123',
+                    'is_successful' => true,
+                    'amount' => '100.00',
+                    'currency' => 'SAR',
+                    'payment_brand' => 'VISA',
+                ],
+            ]);
     }
 
     /** @test */
@@ -166,15 +160,15 @@ class PaymentFlowTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'data' => [
-                        'refund_id' => 'test_payment_123',
-                        'is_successful' => true,
-                        'amount' => '100.00',
-                        'currency' => 'SAR',
-                    ],
-                ]);
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'refund_id' => 'test_payment_123',
+                    'is_successful' => true,
+                    'amount' => '100.00',
+                    'currency' => 'SAR',
+                ],
+            ]);
     }
 
     /** @test */
@@ -186,15 +180,15 @@ class PaymentFlowTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'data' => [
-                        'capture_id' => 'test_payment_123',
-                        'is_successful' => true,
-                        'amount' => '100.00',
-                        'currency' => 'SAR',
-                    ],
-                ]);
+            ->assertJson([
+                'success' => true,
+                'data' => [
+                    'capture_id' => 'test_payment_123',
+                    'is_successful' => true,
+                    'amount' => '100.00',
+                    'currency' => 'SAR',
+                ],
+            ]);
     }
 
     /** @test */
@@ -208,10 +202,10 @@ class PaymentFlowTest extends TestCase
         ]);
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'redirect_url' => 'https://test.oppwa.com/checkout/test_checkout_123',
-                ]);
+            ->assertJson([
+                'success' => true,
+                'redirect_url' => 'https://test.oppwa.com/checkout/test_checkout_123',
+            ]);
     }
 
     /** @test */
@@ -230,10 +224,10 @@ class PaymentFlowTest extends TestCase
         $response = $this->get('/payment/retry?payment_id=test_payment_123&brand=VISA');
 
         $response->assertStatus(200)
-                ->assertJson([
-                    'success' => true,
-                    'redirect_url' => 'https://test.oppwa.com/checkout/test_checkout_123',
-                ]);
+            ->assertJson([
+                'success' => true,
+                'redirect_url' => 'https://test.oppwa.com/checkout/test_checkout_123',
+            ]);
     }
 
     /** @test */
@@ -282,7 +276,7 @@ class PaymentFlowTest extends TestCase
         $response = $this->get('/payment/success?id=test_payment_123');
 
         $response->assertStatus(200)
-                ->assertViewIs('payment.success');
+            ->assertViewIs('payment.success');
     }
 
     /** @test */
@@ -291,7 +285,7 @@ class PaymentFlowTest extends TestCase
         $response = $this->get('/payment/failed?id=test_payment_123&error=Card declined');
 
         $response->assertStatus(200)
-                ->assertViewIs('payment.failed');
+            ->assertViewIs('payment.failed');
     }
 
     /** @test */
@@ -300,7 +294,7 @@ class PaymentFlowTest extends TestCase
         $response = $this->get('/payment/pending?id=test_payment_123');
 
         $response->assertStatus(200)
-                ->assertViewIs('payment.pending');
+            ->assertViewIs('payment.pending');
     }
 
     /** @test */
@@ -309,7 +303,7 @@ class PaymentFlowTest extends TestCase
         $response = $this->get('/payment/cancelled?id=test_payment_123');
 
         $response->assertStatus(200)
-                ->assertViewIs('payment.cancelled');
+            ->assertViewIs('payment.cancelled');
     }
 
     /** @test */
@@ -319,7 +313,7 @@ class PaymentFlowTest extends TestCase
             'id' => 'test_payment_123',
             'result' => [
                 'code' => '000.100.110',
-                'description' => 'Success'
+                'description' => 'Success',
             ],
         ]);
 
