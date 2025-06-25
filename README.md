@@ -31,38 +31,45 @@ A comprehensive Laravel package for integrating HyperPay payment gateway. This p
   - [Manual Installation](#manual-installation)
 - [Configuration](#configuration)
   - [Environment Variables](#environment-variables)
-  - [Payment Brands](#payment-brands)
-  - [Webhook Configuration](#webhook-configuration)
-  - [Logging Configuration](#logging-configuration)
-  - [Risk Management](#risk-management)
+  - [Configuration File](#configuration-file)
 - [Usage](#usage)
-  - [Basic Payment Flow](#basic-payment-flow)
-  - [Checkout Process](#checkout-process)
-  - [Payment Status Checking](#payment-status-checking)
-  - [Refund Processing](#refund-processing)
-  - [Webhook Handling](#webhook-handling)
+  - [Basic Usage](#basic-usage)
+    - [Using the Facade](#using-the-facade)
+    - [Using Dependency Injection](#using-dependency-injection)
+  - [Advanced Usage](#advanced-usage)
+    - [Payment Status Checking](#payment-status-checking)
+    - [Refund Processing](#refund-processing)
+    - [Payment Capture](#payment-capture)
+    - [Webhook Handling](#webhook-handling)
+    - [Event Handling](#event-handling)
+  - [Supported Payment Brands](#supported-payment-brands)
 - [API Reference](#api-reference)
-  - [HyperPay Facade](#hyperpay-facade)
-  - [PaymentRequest DTO](#paymentrequest-dto)
-  - [CheckoutRequest DTO](#checkoutrequest-dto)
+  - [Facade Methods](#facade-methods)
+  - [DTOs](#dtos)
+    - [CheckoutRequest](#checkoutrequest)
+    - [PaymentRequest](#paymentrequest)
   - [Events](#events)
-  - [Exceptions](#exceptions)
-- [Database](#database)
-  - [Migrations](#migrations)
-  - [Models](#models)
-  - [Traits](#traits)
-- [Advanced Features](#advanced-features)
-  - [Custom Payment Brands](#custom-payment-brands)
-  - [Risk Management](#risk-management)
-  - [Logging and Monitoring](#logging-and-monitoring)
-  - [Error Handling](#error-handling)
+- [Card Tokenization](#card-tokenization)
+  - [Features](#features-1)
+  - [Database Models](#database-models)
+    - [Payment Model](#payment-model)
+    - [CreditCard Model](#creditcard-model)
+  - [User Model Integration](#user-model-integration)
+  - [Card Tokenization Usage](#card-tokenization-usage)
+    - [One-Time Payment with Tokenization](#one-time-payment-with-tokenization)
+    - [Recurring Payment with Saved Card](#recurring-payment-with-saved-card)
+  - [Credit Card Management API](#credit-card-management-api)
+  - [Credit Card Management Methods](#credit-card-management-methods)
+- [File Structure](#file-structure)
 - [Testing](#testing)
 - [Security](#security)
 - [Contributing](#contributing)
 - [Credits](#credits)
 - [License](#license)
 - [Support](#support)
-
+- [Changelog](#changelog)
+- [FAQ / Troubleshooting](#faq--troubleshooting)
+- [Security Best Practices](#security-best-practices)
 
 ## Requirements
 
@@ -404,7 +411,6 @@ new PaymentRequest(
 | `RefundProcessed` | Fired when refund is processed | `paymentId`, `amount`, `brand` |
 | `ChargebackReceived` | Fired when chargeback is received | `paymentId`, `amount`, `brand` |
 
-
 ## Card Tokenization
 
 The package supports card tokenization for secure recurring payments and one-click checkout.
@@ -593,16 +599,11 @@ laravel-hyperpay-gateway/
 ├── composer.json                   # Composer configuration
 ├── config/
 │   └── hyperpay.php               # Package configuration file
-├── configure.php                   # Package configuration script
 ├── database/
-│   ├── factories/
-│   │   └── ModelFactory.php       # Database factory stub
 │   └── migrations/
 │       ├── create_payments_table.php      # Payments table migration
-│       ├── create_credit_cards_table.php  # Credit cards table migration
-│       └── create_skeleton_table.php.stub # Migration stub
+│       └── create_credit_cards_table.php  # Credit cards table migration
 ├── LICENSE.md                      # MIT License
-├── phpstan-baseline.neon          # PHPStan baseline configuration
 ├── phpstan.neon.dist              # PHPStan configuration
 ├── phpunit.xml.dist               # PHPUnit configuration
 ├── README.md                       # This file
@@ -646,6 +647,8 @@ laravel-hyperpay-gateway/
 │   │       ├── PaymentController.php    # Payment processing controller
 │   │       ├── WebhookController.php    # Webhook handling controller
 │   │       └── CreditCardController.php # Credit card management controller
+│   ├── Listeners/                 # Event listeners
+│   │   └── HandleSuccessfulPayment.php  # Example payment success listener
 │   ├── Models/                    # Database models
 │   │   ├── Payment.php            # Payment model
 │   │   └── CreditCard.php         # Credit card model
@@ -657,14 +660,12 @@ laravel-hyperpay-gateway/
 │   └── Services/                  # Service classes
 │       ├── HyperPayResultCodeService.php # Result code handling service
 │       ├── HyperPayService.php    # Main HyperPay service
-│   │   └── WebhookService.php     # Webhook processing service
+│       └── WebhookService.php     # Webhook processing service
 └── tests/                         # Test files
     ├── Feature/
     │   └── PaymentFlowTest.php    # Payment flow feature tests
     ├── Unit/
     │   └── HyperPayServiceTest.php # Service unit tests
-    ├── ArchTest.php               # Architecture tests
-    ├── ExampleTest.php            # Example tests
     ├── Pest.php                   # Pest configuration
     └── TestCase.php               # Base test case
 ```
