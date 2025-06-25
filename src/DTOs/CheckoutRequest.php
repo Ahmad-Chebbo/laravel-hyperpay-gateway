@@ -2,10 +2,6 @@
 
 namespace AhmadChebbo\LaravelHyperpay\DTOs;
 
-use AhmadChebbo\LaravelHyperpay\DTOs\CustomerData;
-use AhmadChebbo\LaravelHyperpay\DTOs\BillingData;
-use AhmadChebbo\LaravelHyperpay\DTOs\ShippingData;
-
 /**
  * Checkout Request DTO
  */
@@ -32,6 +28,6 @@ class CheckoutRequest
             'currency' => $this->currency,
             'paymentType' => $this->paymentType,
             'merchantTransactionId' => $this->merchantTransactionId,
-        ], fn($value) => $value !== null);
+        ], fn ($value) => $value !== null);
     }
 }

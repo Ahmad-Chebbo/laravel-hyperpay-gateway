@@ -22,14 +22,30 @@ class CustomerData
     {
         $data = [];
 
-        if ($this->givenName) $data['customer.givenName'] = $this->givenName;
-        if ($this->surname) $data['customer.surname'] = $this->surname;
-        if ($this->email) $data['customer.email'] = $this->email;
-        if ($this->phone) $data['customer.phone'] = $this->phone;
-        if ($this->ip) $data['customer.ip'] = $this->ip;
-        if ($this->merchantCustomerId) $data['customer.merchantCustomerId'] = $this->merchantCustomerId;
-        if ($this->identificationDocId) $data['customer.identificationDocId'] = $this->identificationDocId;
-        if ($this->identificationType) $data['customer.identificationType'] = $this->identificationType;
+        if ($this->givenName) {
+            $data['customer.givenName'] = $this->givenName;
+        }
+        if ($this->surname) {
+            $data['customer.surname'] = $this->surname;
+        }
+        if ($this->email) {
+            $data['customer.email'] = $this->email;
+        }
+        if ($this->phone) {
+            $data['customer.phone'] = $this->phone;
+        }
+        if ($this->ip) {
+            $data['customer.ip'] = $this->ip;
+        }
+        if ($this->merchantCustomerId) {
+            $data['customer.merchantCustomerId'] = $this->merchantCustomerId;
+        }
+        if ($this->identificationDocId) {
+            $data['customer.identificationDocId'] = $this->identificationDocId;
+        }
+        if ($this->identificationType) {
+            $data['customer.identificationType'] = $this->identificationType;
+        }
 
         return $data;
     }

@@ -41,6 +41,6 @@ class PaymentRequest
             'paymentType' => $this->paymentType,
             'merchantTransactionId' => $this->merchantTransactionId,
             'shopperResultUrl' => $this->shopperResultUrl,
-        ], fn($value) => $value !== null);
+        ], fn ($value) => $value !== null);
     }
 }

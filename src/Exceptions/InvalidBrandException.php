@@ -2,7 +2,6 @@
 
 namespace AhmadChebbo\LaravelHyperpay\Exceptions;
 
-use AhmadChebbo\LaravelHyperpay\Exceptions\HyperPayException;
 use Exception;
 
 class InvalidBrandException extends HyperPayException

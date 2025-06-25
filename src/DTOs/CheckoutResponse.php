@@ -29,6 +29,7 @@ class CheckoutResponse
     public function isSuccessful(): bool
     {
         $code = $this->getResultCode();
+
         return $code && app('hyperpay.result')->isSuccessful($code);
     }
 

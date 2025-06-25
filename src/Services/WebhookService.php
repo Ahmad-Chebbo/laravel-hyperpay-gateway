@@ -2,14 +2,15 @@
 
 namespace AhmadChebbo\LaravelHyperpay\Services;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use AhmadChebbo\LaravelHyperpay\Events\PaymentStatusChanged;
 use AhmadChebbo\LaravelHyperpay\Exceptions\WebhookVerificationException;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class WebhookService
 {
     protected array $config;
+
     protected HyperPayResultCodeService $resultService;
 
     public function __construct(HyperPayResultCodeService $resultService)
@@ -57,7 +58,7 @@ class WebhookService
 
         $expectedSignature = hash_hmac('sha256', $payload, $webhookKey);
 
-        if (!hash_equals($expectedSignature, $signature)) {
+        if (! hash_equals($expectedSignature, $signature)) {
             throw new WebhookVerificationException('Invalid webhook signature');
         }
     }
@@ -97,7 +98,7 @@ class WebhookService
      */
     protected function logWebhook(array $data): void
     {
-        if (!$this->config['logging']['enabled']) {
+        if (! $this->config['logging']['enabled']) {
             return;
         }
 

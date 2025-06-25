@@ -2,9 +2,9 @@
 
 namespace AhmadChebbo\LaravelHyperpay\Console\Commands;
 
-use Illuminate\Console\Command;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
 use AhmadChebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Illuminate\Console\Command;
 
 class HyperPayStatusCommand extends Command
 {
@@ -16,6 +16,7 @@ class HyperPayStatusCommand extends Command
     protected $description = 'Check payment status from HyperPay';
 
     protected HyperPayService $hyperPayService;
+
     protected HyperPayResultCodeService $resultCodeService;
 
     public function __construct(
@@ -46,6 +47,7 @@ class HyperPayStatusCommand extends Command
 
         } catch (\Exception $e) {
             $this->error("Error checking payment status: {$e->getMessage()}");
+
             return self::FAILURE;
         }
     }
@@ -61,7 +63,7 @@ class HyperPayStatusCommand extends Command
                 ['Result Code', $response->getResultCode()],
                 ['Result Description', $response->getResultDescription()],
                 ['Status', $this->getStatusText($response)],
-                ['Amount', $response->getAmount() . ' ' . $response->getCurrency()],
+                ['Amount', $response->getAmount().' '.$response->getCurrency()],
                 ['Payment Brand', $response->getPaymentBrand()],
                 ['Merchant Transaction ID', $response->getMerchantTransactionId()],
                 ['Timestamp', $response->getTimestamp()],
@@ -121,9 +123,9 @@ class HyperPayStatusCommand extends Command
         $this->line("Description: {$description}");
         $this->line("Category: <fg=blue>{$category}</>");
         $this->line("Suggested Action: {$suggestedAction}");
-        $this->line("Can Retry: " . ($canRetry ? '<fg=green>Yes</>' : '<fg=red>No</>'));
+        $this->line('Can Retry: '.($canRetry ? '<fg=green>Yes</>' : '<fg=red>No</>'));
 
-        if (!$response->isSuccessful()) {
+        if (! $response->isSuccessful()) {
             $this->newLine();
             $this->warn('Payment was not successful. Please review the result code and take appropriate action.');
         }
