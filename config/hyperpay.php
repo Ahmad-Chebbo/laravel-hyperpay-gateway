@@ -54,8 +54,8 @@ return [
     */
 
     'models' => [
-        'payment' => \AhmadChebbo\LaravelHyperpay\Models\Payment::class,
-        'credit_card' => \AhmadChebbo\LaravelHyperpay\Models\CreditCard::class,
+        'payment' => \Ahmad-Chebbo\LaravelHyperpay\Models\Payment::class,
+        'credit_card' => \Ahmad-Chebbo\LaravelHyperpay\Models\CreditCard::class,
     ],
 
     /*

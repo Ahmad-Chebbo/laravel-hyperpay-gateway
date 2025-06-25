@@ -1,12 +1,12 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay\Http\Controllers;
+namespace Ahmad-Chebbo\LaravelHyperpay\Http\Controllers;
 
-use AhmadChebbo\LaravelHyperpay\Events\PaymentFailed;
-use AhmadChebbo\LaravelHyperpay\Events\PaymentPending;
-use AhmadChebbo\LaravelHyperpay\Events\PaymentSuccessful;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Ahmad-Chebbo\LaravelHyperpay\Events\PaymentFailed;
+use Ahmad-Chebbo\LaravelHyperpay\Events\PaymentPending;
+use Ahmad-Chebbo\LaravelHyperpay\Events\PaymentSuccessful;
+use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
+use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;

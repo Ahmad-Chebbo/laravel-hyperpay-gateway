@@ -1,5 +1,5 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay;
+namespace Ahmad-Chebbo\LaravelHyperpay;
 
 class Hyperpay {}

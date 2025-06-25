@@ -1,6 +1,6 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay\Console\Commands;
+namespace Ahmad-Chebbo\LaravelHyperpay\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
@@ -46,7 +46,7 @@ class HyperPayInstallCommand extends Command
         $this->info('Publishing configuration...');
 
         $this->callSilent('vendor:publish', [
-            '--provider' => 'AhmadChebbo\LaravelHyperpay\HyperPayServiceProvider',
+            '--provider' => 'Ahmad-Chebbo\LaravelHyperpay\HyperPayServiceProvider',
             '--tag' => 'hyperpay-config',
             '--force' => $this->option('force'),
         ]);
@@ -57,7 +57,7 @@ class HyperPayInstallCommand extends Command
         $this->info('Publishing migrations...');
 
         $this->callSilent('vendor:publish', [
-            '--provider' => 'AhmadChebbo\LaravelHyperpay\HyperPayServiceProvider',
+            '--provider' => 'Ahmad-Chebbo\LaravelHyperpay\HyperPayServiceProvider',
             '--tag' => 'hyperpay-migrations',
             '--force' => $this->option('force'),
         ]);
@@ -68,7 +68,7 @@ class HyperPayInstallCommand extends Command
         $this->info('Publishing views...');
 
         $this->callSilent('vendor:publish', [
-            '--provider' => 'AhmadChebbo\LaravelHyperpay\HyperPayServiceProvider',
+            '--provider' => 'Ahmad-Chebbo\LaravelHyperpay\HyperPayServiceProvider',
             '--tag' => 'hyperpay-views',
             '--force' => $this->option('force'),
         ]);

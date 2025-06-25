@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AhmadChebbo\LaravelHyperpay\Traits;
+namespace Ahmad-Chebbo\LaravelHyperpay\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -10,7 +10,7 @@ trait HasPayments
 {
     public function payments(): MorphMany
     {
-        return $this->morphMany(\AhmadChebbo\LaravelHyperpay\Models\Payment::getModelClass(), 'payable');
+        return $this->morphMany(\Ahmad-Chebbo\LaravelHyperpay\Models\Payment::getModelClass(), 'payable');
     }
 
     public function successfulPayments(): MorphMany
@@ -33,7 +33,7 @@ trait HasPayments
         return $this->successfulPayments()->sum('amount');
     }
 
-    public function getLastPaymentAttribute(): ?\AhmadChebbo\LaravelHyperpay\Models\Payment
+    public function getLastPaymentAttribute(): ?\Ahmad-Chebbo\LaravelHyperpay\Models\Payment
     {
         return $this->payments()->latest()->first();
     }

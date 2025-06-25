@@ -1,6 +1,6 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay\Exceptions;
+namespace Ahmad-Chebbo\LaravelHyperpay\Exceptions;
 
 use Exception;
 

@@ -1,14 +1,14 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay\Services;
+namespace Ahmad-Chebbo\LaravelHyperpay\Services;
 
-use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutResponse;
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentResponse;
-use AhmadChebbo\LaravelHyperpay\Exceptions\HyperPayException;
-use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidAmountException;
-use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidBrandException;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\CheckoutRequest;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\CheckoutResponse;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\PaymentRequest;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\PaymentResponse;
+use Ahmad-Chebbo\LaravelHyperpay\Exceptions\HyperPayException;
+use Ahmad-Chebbo\LaravelHyperpay\Exceptions\InvalidAmountException;
+use Ahmad-Chebbo\LaravelHyperpay\Exceptions\InvalidBrandException;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 

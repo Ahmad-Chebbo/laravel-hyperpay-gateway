@@ -1,6 +1,6 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay\Facades;
+namespace Ahmad-Chebbo\LaravelHyperpay\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

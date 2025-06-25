@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace AhmadChebbo\LaravelHyperpay\Traits;
+namespace Ahmad-Chebbo\LaravelHyperpay\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -13,7 +13,7 @@ trait HasCreditCards
      */
     public function creditCards(): MorphMany
     {
-        return $this->morphMany(\AhmadChebbo\LaravelHyperpay\Models\CreditCard::class, 'cardable');
+        return $this->morphMany(\Ahmad-Chebbo\LaravelHyperpay\Models\CreditCard::class, 'cardable');
     }
 
     /**
@@ -27,7 +27,7 @@ trait HasCreditCards
     /**
      * Get default credit card
      */
-    public function defaultCreditCard(): ?\AhmadChebbo\LaravelHyperpay\Models\CreditCard
+    public function defaultCreditCard(): ?\Ahmad-Chebbo\LaravelHyperpay\Models\CreditCard
     {
         return $this->creditCards()->default()->first();
     }
@@ -43,7 +43,7 @@ trait HasCreditCards
     /**
      * Add a new credit card
      */
-    public function addCreditCard(array $cardData): \AhmadChebbo\LaravelHyperpay\Models\CreditCard
+    public function addCreditCard(array $cardData): \Ahmad-Chebbo\LaravelHyperpay\Models\CreditCard
     {
         return $this->creditCards()->create($cardData);
     }
@@ -51,7 +51,7 @@ trait HasCreditCards
     /**
      * Save credit card from HyperPay response
      */
-    public function saveCreditCardFromResponse(array $response, array $cardInfo = []): ?\AhmadChebbo\LaravelHyperpay\Models\CreditCard
+    public function saveCreditCardFromResponse(array $response, array $cardInfo = []): ?\Ahmad-Chebbo\LaravelHyperpay\Models\CreditCard
     {
         if (! isset($response['registrationId'])) {
             return null;
@@ -82,7 +82,7 @@ trait HasCreditCards
     /**
      * Get credit card by registration ID
      */
-    public function getCreditCardByRegistrationId(string $registrationId): ?\AhmadChebbo\LaravelHyperpay\Models\CreditCard
+    public function getCreditCardByRegistrationId(string $registrationId): ?\Ahmad-Chebbo\LaravelHyperpay\Models\CreditCard
     {
         return $this->creditCards()
             ->where('registration_id', $registrationId)

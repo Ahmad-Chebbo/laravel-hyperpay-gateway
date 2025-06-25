@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace AhmadChebbo\LaravelHyperpay\Tests\Unit;
+namespace Ahmad-Chebbo\LaravelHyperpay\Tests\Unit;
 
-use AhmadChebbo\LaravelHyperpay\DTOs\BillingData;
-use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\CustomerData;
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
-use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidAmountException;
-use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidBrandException;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\BillingData;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\CheckoutRequest;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\CustomerData;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\PaymentRequest;
+use Ahmad-Chebbo\LaravelHyperpay\Exceptions\InvalidAmountException;
+use Ahmad-Chebbo\LaravelHyperpay\Exceptions\InvalidBrandException;
+use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;

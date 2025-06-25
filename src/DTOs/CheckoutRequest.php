@@ -1,6 +1,6 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay\DTOs;
+namespace Ahmad-Chebbo\LaravelHyperpay\DTOs;
 
 /**
  * Checkout Request DTO

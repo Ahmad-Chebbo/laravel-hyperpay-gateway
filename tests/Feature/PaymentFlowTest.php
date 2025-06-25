@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace AhmadChebbo\LaravelHyperpay\Tests\Feature;
+namespace Ahmad-Chebbo\LaravelHyperpay\Tests\Feature;
 
-use AhmadChebbo\LaravelHyperpay\Events\PaymentSuccessful;
-use AhmadChebbo\LaravelHyperpay\Models\Payment;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Ahmad-Chebbo\LaravelHyperpay\Events\PaymentSuccessful;
+use Ahmad-Chebbo\LaravelHyperpay\Models\Payment;
+use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Tests\TestCase;
@@ -22,14 +22,14 @@ class PaymentFlowTest extends TestCase
         // Mock the HyperPay service to avoid real API calls
         $this->mock(HyperPayService::class, function ($mock) {
             $mock->shouldReceive('createCheckout')
-                ->andReturn(new \AhmadChebbo\LaravelHyperpay\DTOs\CheckoutResponse([
+                ->andReturn(new \Ahmad-Chebbo\LaravelHyperpay\DTOs\CheckoutResponse([
                     'id' => 'test_checkout_123',
                     'redirectUrl' => 'https://test.oppwa.com/checkout/test_checkout_123',
                     'merchantTransactionId' => 'order_123',
                 ]));
 
             $mock->shouldReceive('processPayment')
-                ->andReturn(new \AhmadChebbo\LaravelHyperpay\DTOs\PaymentResponse([
+                ->andReturn(new \Ahmad-Chebbo\LaravelHyperpay\DTOs\PaymentResponse([
                     'id' => 'test_payment_123',
                     'result' => [
                         'code' => '000.100.110',
@@ -42,7 +42,7 @@ class PaymentFlowTest extends TestCase
                 ]));
 
             $mock->shouldReceive('getPaymentStatus')
-                ->andReturn(new \AhmadChebbo\LaravelHyperpay\DTOs\PaymentResponse([
+                ->andReturn(new \Ahmad-Chebbo\LaravelHyperpay\DTOs\PaymentResponse([
                     'id' => 'test_payment_123',
                     'result' => [
                         'code' => '000.100.110',

@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AhmadChebbo\LaravelHyperpay\Http\Controllers;
+namespace Ahmad-Chebbo\LaravelHyperpay\Http\Controllers;
 
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Ahmad-Chebbo\LaravelHyperpay\DTOs\PaymentRequest;
+use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;

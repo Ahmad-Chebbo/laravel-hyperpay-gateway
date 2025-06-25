@@ -1,9 +1,9 @@
 <?php
 
-namespace AhmadChebbo\LaravelHyperpay\Http\Controllers;
+namespace Ahmad-Chebbo\LaravelHyperpay\Http\Controllers;
 
-use AhmadChebbo\LaravelHyperpay\Exceptions\WebhookVerificationException;
-use AhmadChebbo\LaravelHyperpay\Services\WebhookService;
+use Ahmad-Chebbo\LaravelHyperpay\Exceptions\WebhookVerificationException;
+use Ahmad-Chebbo\LaravelHyperpay\Services\WebhookService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 

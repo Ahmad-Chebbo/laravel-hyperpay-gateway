@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace AhmadChebbo\LaravelHyperpay\Listeners;
+namespace Ahmad-Chebbo\LaravelHyperpay\Listeners;
 
-use AhmadChebbo\LaravelHyperpay\Events\PaymentSuccessful;
-use AhmadChebbo\LaravelHyperpay\Models\Payment;
+use Ahmad-Chebbo\LaravelHyperpay\Events\PaymentSuccessful;
+use Ahmad-Chebbo\LaravelHyperpay\Models\Payment;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Notification;

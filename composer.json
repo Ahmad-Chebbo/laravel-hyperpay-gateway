@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "AhmadChebbo\\LaravelHyperpay\\": "src/"
+            "Ahmad-Chebbo\\LaravelHyperpay\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "AhmadChebbo\\LaravelHyperpay\\Tests\\": "tests/",
+            "Ahmad-Chebbo\\LaravelHyperpay\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -58,10 +58,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AhmadChebbo\\LaravelHyperpay\\HyperpayServiceProvider"
+                "Ahmad-Chebbo\\LaravelHyperpay\\HyperpayServiceProvider"
             ],
             "aliases": {
-                "Hyperpay": "AhmadChebbo\\LaravelHyperpay\\Facades\\Hyperpay"
+                "Hyperpay": "Ahmad-Chebbo\\LaravelHyperpay\\Facades\\Hyperpay"
             }
         }
     },
