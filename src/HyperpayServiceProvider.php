@@ -1,0 +1,71 @@
+<?php
+
+namespace AhmadChebbo\LaravelHyperpay;
+
+use Illuminate\Support\ServiceProvider;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
+
+class HyperpayServiceProvider extends ServiceProvider
+{
+    /**
+     * Register services.
+     */
+    public function register(): void
+    {
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/hyperpay.php', 'hyperpay'
+        );
+
+        $this->app->singleton('hyperpay', function ($app) {
+            return new HyperPayService();
+        });
+
+        $this->app->singleton('hyperpay.result', function ($app) {
+            return new HyperPayResultCodeService();
+        });
+    }
+
+    /**
+     * Bootstrap services.
+     */
+    public function boot(): void
+    {
+        // Publish config file
+        $this->publishes([
+            __DIR__.'/../config/hyperpay.php' => config_path('hyperpay.php'),
+        ], 'hyperpay-config');
+
+        // Publish migration files
+        $this->publishes([
+            __DIR__.'/../database/migrations' => database_path('migrations'),
+        ], 'hyperpay-migrations');
+
+        // Load routes
+        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
+
+        // Load views
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'hyperpay');
+
+        // Publish views
+        $this->publishes([
+            __DIR__.'/../resources/views' => resource_path('views/vendor/hyperpay'),
+        ], 'hyperpay-views');
+
+        // Load translations
+        $this->loadTranslationsFrom(__DIR__.'/../lang', 'hyperpay');
+
+        // Publish translations
+        $this->publishes([
+            __DIR__.'/../lang' => resource_path('lang/vendor/hyperpay'),
+        ], 'hyperpay-lang');
+
+        // Register commands
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                // Console\Commands\HyperPayInstallCommand::class,
+                // Console\Commands\HyperPayStatusCommand::class,
+            ]);
+        }
+    }
+}
