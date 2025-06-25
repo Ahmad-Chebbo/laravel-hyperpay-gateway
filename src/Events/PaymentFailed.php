@@ -13,6 +13,7 @@ class PaymentFailed
     use Dispatchable, SerializesModels;
 
     public array $paymentData;
+
     public string $reason;
 
     public function __construct(array $paymentData, string $reason = '')

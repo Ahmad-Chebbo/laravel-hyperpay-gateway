@@ -2,10 +2,6 @@
 
 namespace AhmadChebbo\LaravelHyperpay\DTOs;
 
-use AhmadChebbo\LaravelHyperpay\DTOs\CustomerData;
-use AhmadChebbo\LaravelHyperpay\DTOs\BillingData;
-use AhmadChebbo\LaravelHyperpay\DTOs\ShippingData;
-
 /**
  * Checkout Request DTO
  */

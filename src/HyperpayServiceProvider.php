@@ -2,9 +2,9 @@
 
 namespace AhmadChebbo\LaravelHyperpay;
 
-use Illuminate\Support\ServiceProvider;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
 use AhmadChebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Illuminate\Support\ServiceProvider;
 
 class HyperpayServiceProvider extends ServiceProvider
 {
@@ -18,11 +18,11 @@ class HyperpayServiceProvider extends ServiceProvider
         );
 
         $this->app->singleton('hyperpay', function ($app) {
-            return new HyperPayService();
+            return new HyperPayService;
         });
 
         $this->app->singleton('hyperpay.result', function ($app) {
-            return new HyperPayResultCodeService();
+            return new HyperPayResultCodeService;
         });
     }
 

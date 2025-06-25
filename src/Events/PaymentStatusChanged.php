@@ -32,18 +32,21 @@ class PaymentStatusChanged
     public function isSuccessful(): bool
     {
         $code = $this->getResultCode();
+
         return $code && app('hyperpay.result')->isSuccessful($code);
     }
 
     public function isPending(): bool
     {
         $code = $this->getResultCode();
+
         return $code && app('hyperpay.result')->isPending($code);
     }
 
     public function isRejected(): bool
     {
         $code = $this->getResultCode();
+
         return $code && app('hyperpay.result')->isRejected($code);
     }
 

@@ -24,6 +24,7 @@ class PaymentRequest
         public ?array $threeDSecure = null,
         public ?bool $createRegistration = null,
         public ?string $registrationId = null,
+        public ?string $shopperResultUrl = null,
     ) {}
 
     public function toArray(): array
@@ -38,6 +39,7 @@ class PaymentRequest
             'cvv' => $this->cvv,
             'currency' => $this->currency,
             'paymentType' => $this->paymentType,
+            'shopperResultUrl' => $this->shopperResultUrl,
             'merchantTransactionId' => $this->merchantTransactionId,
             'createRegistration' => $this->createRegistration,
             'registrationId' => $this->registrationId,

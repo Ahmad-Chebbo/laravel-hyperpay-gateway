@@ -10,6 +10,7 @@ use Exception;
 class HyperPayException extends Exception
 {
     protected ?string $hyperPayCode = null;
+
     protected ?array $context = null;
 
     public function __construct(

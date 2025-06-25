@@ -2,22 +2,26 @@
 
 namespace AhmadChebbo\LaravelHyperpay\Services;
 
-use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
-use AhmadChebbo\LaravelHyperpay\Exceptions\HyperPayException;
-use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidBrandException;
-use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidAmountException;
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentResponse;
 use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutRequest;
 use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutResponse;
+use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
+use AhmadChebbo\LaravelHyperpay\DTOs\PaymentResponse;
+use AhmadChebbo\LaravelHyperpay\Exceptions\HyperPayException;
+use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidAmountException;
+use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidBrandException;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class HyperPayService
 {
     protected array $config;
+
     protected string $environment;
+
     protected string $baseUrl;
+
     protected string $token;
+
     protected array $entities;
 
     public function __construct()
@@ -177,9 +181,9 @@ class HyperPayService
     /**
      * Get payment status
      */
-    public function getPaymentStatus(string $paymentId, string $brand = null): PaymentResponse
+    public function getPaymentStatus(string $paymentId, ?string $brand = null): PaymentResponse
     {
-        if (!$brand) {
+        if (! $brand) {
             // Try to determine brand from payment ID or use a default entity
             $brand = 'VISA'; // Default fallback
         }
@@ -188,7 +192,7 @@ class HyperPayService
         $entityId = $this->getEntityId($brand);
 
         $response = $this->makeRequest('GET', "/v1/payments/{$paymentId}", [
-            'entityId' => $entityId
+            'entityId' => $entityId,
         ]);
 
         $this->logTransaction('status_check', ['paymentId' => $paymentId], $response);
@@ -199,7 +203,7 @@ class HyperPayService
     /**
      * Process refund
      */
-    public function processRefund(string $paymentId, float $amount, string $brand, string $reason = null): PaymentResponse
+    public function processRefund(string $paymentId, float $amount, string $brand, ?string $reason = null): PaymentResponse
     {
         $this->validateAmount($amount);
         $this->validateBrand($brand);
@@ -292,7 +296,7 @@ class HyperPayService
     {
         $brand = strtolower($brand);
 
-        if (!isset($this->entities[$brand])) {
+        if (! isset($this->entities[$brand])) {
             throw new InvalidBrandException("Entity ID not configured for brand: {$brand}");
         }
 
@@ -317,14 +321,14 @@ class HyperPayService
             ])->timeout($this->config['customization']['timeout'] ?? 30);
 
             if ($method === 'GET') {
-                $response = $request->get($this->baseUrl . $endpoint, $data);
+                $response = $request->get($this->baseUrl.$endpoint, $data);
             } else {
-                $response = $request->asForm()->post($this->baseUrl . $endpoint, $data);
+                $response = $request->asForm()->post($this->baseUrl.$endpoint, $data);
             }
 
-            if (!$response->successful()) {
+            if (! $response->successful()) {
                 throw new HyperPayException(
-                    "HyperPay API request failed: " . $response->body(),
+                    'HyperPay API request failed: '.$response->body(),
                     $response->status()
                 );
             }
@@ -339,7 +343,7 @@ class HyperPayService
             ]);
 
             throw new HyperPayException(
-                "Failed to communicate with HyperPay API: " . $e->getMessage(),
+                'Failed to communicate with HyperPay API: '.$e->getMessage(),
                 0,
                 $e
             );
@@ -382,7 +386,7 @@ class HyperPayService
      */
     protected function validateBrand(string $brand): void
     {
-        if (!$this->isBrandSupported($brand)) {
+        if (! $this->isBrandSupported($brand)) {
             throw new InvalidBrandException("Unsupported payment brand: {$brand}");
         }
     }
@@ -393,36 +397,36 @@ class HyperPayService
     protected function validateCardData(PaymentRequest $request): void
     {
         if (empty($request->cardNumber)) {
-            throw new HyperPayException("Card number is required");
+            throw new HyperPayException('Card number is required');
         }
 
         if (empty($request->cardHolder)) {
-            throw new HyperPayException("Card holder name is required");
+            throw new HyperPayException('Card holder name is required');
         }
 
         if (empty($request->expiryMonth) || empty($request->expiryYear)) {
-            throw new HyperPayException("Card expiry date is required");
+            throw new HyperPayException('Card expiry date is required');
         }
 
         if (empty($request->cvv)) {
-            throw new HyperPayException("CVV is required");
+            throw new HyperPayException('CVV is required');
         }
 
         // Basic validation
-        if (!preg_match('/^\d{13,19}$/', $request->cardNumber)) {
-            throw new HyperPayException("Invalid card number format");
+        if (! preg_match('/^\d{13,19}$/', $request->cardNumber)) {
+            throw new HyperPayException('Invalid card number format');
         }
 
-        if (!preg_match('/^(0[1-9]|1[0-2])$/', str_pad($request->expiryMonth, 2, '0', STR_PAD_LEFT))) {
-            throw new HyperPayException("Invalid expiry month");
+        if (! preg_match('/^(0[1-9]|1[0-2])$/', str_pad($request->expiryMonth, 2, '0', STR_PAD_LEFT))) {
+            throw new HyperPayException('Invalid expiry month');
         }
 
-        if (!preg_match('/^\d{2,4}$/', $request->expiryYear)) {
-            throw new HyperPayException("Invalid expiry year");
+        if (! preg_match('/^\d{2,4}$/', $request->expiryYear)) {
+            throw new HyperPayException('Invalid expiry year');
         }
 
-        if (!preg_match('/^\d{3,4}$/', $request->cvv)) {
-            throw new HyperPayException("Invalid CVV");
+        if (! preg_match('/^\d{3,4}$/', $request->cvv)) {
+            throw new HyperPayException('Invalid CVV');
         }
     }
 
@@ -431,7 +435,7 @@ class HyperPayService
      */
     protected function logTransaction(string $type, array $request, array $response): void
     {
-        if (!$this->config['logging']['enabled']) {
+        if (! $this->config['logging']['enabled']) {
             return;
         }
 
@@ -452,7 +456,7 @@ class HyperPayService
      */
     protected function logError(string $message, array $context = []): void
     {
-        if (!$this->config['logging']['enabled']) {
+        if (! $this->config['logging']['enabled']) {
             return;
         }
 

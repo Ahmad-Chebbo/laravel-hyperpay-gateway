@@ -103,6 +103,7 @@ class HyperPayInstallCommand extends Command
         foreach ($envVars as $key => $defaultValue) {
             if (str_contains($envContent, $key)) {
                 $this->info("{$key} already exists in .env file");
+
                 continue;
             }
 

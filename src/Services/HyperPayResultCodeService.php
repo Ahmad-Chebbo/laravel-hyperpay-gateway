@@ -123,9 +123,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a successful transaction
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isSuccessful(string $resultCode): bool
     {
@@ -134,9 +131,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a successful transaction that needs manual review
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isSuccessfulButNeedsReview(string $resultCode): bool
     {
@@ -145,9 +139,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a pending transaction
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isPending(string $resultCode): bool
     {
@@ -157,22 +148,16 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a rejected transaction
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isRejected(string $resultCode): bool
     {
-        return !$this->isSuccessful($resultCode) &&
-               !$this->isSuccessfulButNeedsReview($resultCode) &&
-               !$this->isPending($resultCode);
+        return ! $this->isSuccessful($resultCode) &&
+               ! $this->isSuccessfulButNeedsReview($resultCode) &&
+               ! $this->isPending($resultCode);
     }
 
     /**
      * Check if the result code indicates a bank declined transaction
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isBankDeclined(string $resultCode): bool
     {
@@ -181,9 +166,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a communication error
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isCommunicationError(string $resultCode): bool
     {
@@ -192,9 +174,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a system error
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isSystemError(string $resultCode): bool
     {
@@ -203,9 +182,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a 3D Secure related issue
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function is3DSecureIssue(string $resultCode): bool
     {
@@ -215,9 +191,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a blacklist issue
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isBlacklisted(string $resultCode): bool
     {
@@ -226,9 +199,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a validation error
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isValidationError(string $resultCode): bool
     {
@@ -241,9 +211,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a configuration error
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isConfigurationError(string $resultCode): bool
     {
@@ -252,9 +219,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a risk management issue
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isRiskManagementIssue(string $resultCode): bool
     {
@@ -265,9 +229,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a chargeback
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isChargeback(string $resultCode): bool
     {
@@ -276,9 +237,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if the result code indicates a soft decline (requires customer authentication)
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function isSoftDecline(string $resultCode): bool
     {
@@ -287,9 +245,6 @@ class HyperPayResultCodeService
 
     /**
      * Get the description for a result code
-     *
-     * @param string $resultCode
-     * @return string
      */
     public function getDescription(string $resultCode): string
     {
@@ -298,9 +253,6 @@ class HyperPayResultCodeService
 
     /**
      * Get the category of a result code
-     *
-     * @param string $resultCode
-     * @return string
      */
     public function getCategory(string $resultCode): string
     {
@@ -361,9 +313,6 @@ class HyperPayResultCodeService
 
     /**
      * Get detailed information about a result code
-     *
-     * @param string $resultCode
-     * @return array
      */
     public function getResultInfo(string $resultCode): array
     {
@@ -390,9 +339,6 @@ class HyperPayResultCodeService
 
     /**
      * Check if transaction can be retried based on result code
-     *
-     * @param string $resultCode
-     * @return bool
      */
     public function canRetry(string $resultCode): bool
     {
@@ -400,7 +346,7 @@ class HyperPayResultCodeService
         $retryableCategories = [
             'communication_error',
             'system_error',
-            'soft_decline'
+            'soft_decline',
         ];
 
         $category = $this->getCategory($resultCode);
@@ -420,9 +366,6 @@ class HyperPayResultCodeService
 
     /**
      * Get suggested action based on result code
-     *
-     * @param string $resultCode
-     * @return string
      */
     public function getSuggestedAction(string $resultCode): string
     {
@@ -475,9 +418,6 @@ class HyperPayResultCodeService
 
     /**
      * Parse result code structure
-     *
-     * @param string $resultCode
-     * @return array
      */
     public function parseResultCode(string $resultCode): array
     {
@@ -486,7 +426,7 @@ class HyperPayResultCodeService
         if (count($parts) !== 3) {
             return [
                 'valid' => false,
-                'error' => 'Invalid result code format'
+                'error' => 'Invalid result code format',
             ];
         }
 
@@ -495,7 +435,7 @@ class HyperPayResultCodeService
             'main_group' => $parts[0],
             'sub_group' => $parts[1],
             'specific_code' => $parts[2],
-            'full_code' => $resultCode
+            'full_code' => $resultCode,
         ];
     }
 }

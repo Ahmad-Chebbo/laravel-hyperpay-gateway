@@ -2,18 +2,19 @@
 
 namespace AhmadChebbo\LaravelHyperpay\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
-use AhmadChebbo\LaravelHyperpay\Events\PaymentSuccessful;
 use AhmadChebbo\LaravelHyperpay\Events\PaymentFailed;
 use AhmadChebbo\LaravelHyperpay\Events\PaymentPending;
+use AhmadChebbo\LaravelHyperpay\Events\PaymentSuccessful;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class PaymentController
 {
     protected HyperPayService $hyperPayService;
+
     protected HyperPayResultCodeService $resultCodeService;
 
     public function __construct(

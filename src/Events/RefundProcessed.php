@@ -5,7 +5,6 @@ namespace AhmadChebbo\LaravelHyperpay\Events;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-
 /**
  * Refund Processed Event
  */
