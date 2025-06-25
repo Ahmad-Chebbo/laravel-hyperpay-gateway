@@ -115,4 +115,26 @@ class HyperPayInstallCommand extends Command
             $this->info('Environment variables updated successfully');
         }
     }
+
+    protected function publishTranslations(): void
+    {
+        $this->info('Publishing translations...');
+
+        $this->callSilent('vendor:publish', [
+            '--provider' => 'AhmadShebbo\LaravelHyperpay\HyperPayServiceProvider',
+            '--tag' => 'hyperpay-lang',
+            '--force' => $this->option('force'),
+        ]);
+    }
+
+    protected function publishRoutes(): void
+    {
+        $this->info('Publishing routes...');
+
+        $this->callSilent('vendor:publish', [
+            '--provider' => 'AhmadShebbo\LaravelHyperpay\HyperPayServiceProvider',
+            '--tag' => 'hyperpay-routes',
+            '--force' => $this->option('force'),
+        ]);
+    }
 }
