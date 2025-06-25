@@ -4,12 +4,11 @@ declare(strict_types=1);
 
 namespace AhmadChebbo\LaravelHyperpay\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Http\JsonResponse;
-use Illuminate\View\View;
-use AhmadChebbo\LaravelHyperpay\Models\CreditCard;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
 use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CreditCardController extends Controller
 {
@@ -50,7 +49,7 @@ class CreditCardController extends Controller
             'card_number' => 'required|string',
             'card_holder' => 'required|string',
             'expiry_month' => 'required|integer|between:1,12',
-            'expiry_year' => 'required|integer|min:' . date('Y'),
+            'expiry_year' => 'required|integer|min:'.date('Y'),
             'cvv' => 'required|string|min:3|max:4',
             'currency' => 'nullable|string|size:3',
             'is_default' => 'nullable|boolean',
@@ -75,7 +74,7 @@ class CreditCardController extends Controller
             // Process payment to get registrationId
             $response = $this->hyperPayService->processPayment($paymentRequest);
 
-            if (!$response->isSuccessful()) {
+            if (! $response->isSuccessful()) {
                 return response()->json([
                     'success' => false,
                     'error' => $response->getResultDescription(),
@@ -93,7 +92,7 @@ class CreditCardController extends Controller
 
             $creditCard = $user->saveCreditCardFromResponse($response->toArray(), $cardInfo);
 
-            if (!$creditCard) {
+            if (! $creditCard) {
                 return response()->json([
                     'success' => false,
                     'error' => 'Failed to save credit card',
@@ -132,7 +131,7 @@ class CreditCardController extends Controller
         $user = $request->user();
         $creditCard = $user->getCreditCardByRegistrationId($registrationId);
 
-        if (!$creditCard) {
+        if (! $creditCard) {
             abort(404, 'Credit card not found');
         }
 
@@ -152,7 +151,7 @@ class CreditCardController extends Controller
         $user = $request->user();
         $creditCard = $user->getCreditCardByRegistrationId($registrationId);
 
-        if (!$creditCard) {
+        if (! $creditCard) {
             return response()->json([
                 'success' => false,
                 'error' => 'Credit card not found',
@@ -205,7 +204,7 @@ class CreditCardController extends Controller
         $user = $request->user();
         $creditCard = $user->getCreditCardByRegistrationId($registrationId);
 
-        if (!$creditCard) {
+        if (! $creditCard) {
             return response()->json([
                 'success' => false,
                 'error' => 'Credit card not found',
@@ -236,7 +235,7 @@ class CreditCardController extends Controller
         $user = $request->user();
         $creditCard = $user->getCreditCardByRegistrationId($registrationId);
 
-        if (!$creditCard) {
+        if (! $creditCard) {
             return response()->json([
                 'success' => false,
                 'error' => 'Credit card not found',
@@ -266,20 +265,20 @@ class CreditCardController extends Controller
     {
         $user = $request->user();
         $creditCards = $user->activeCreditCards()
-                           ->orderBy('is_default', 'desc')
-                           ->get()
-                           ->map(function ($card) {
-                               return [
-                                   'id' => $card->id,
-                                   'registration_id' => $card->registration_id,
-                                   'card_type' => $card->card_type,
-                                   'masked_number' => $card->masked_card_number,
-                                   'card_holder' => $card->card_holder_name,
-                                   'expiry' => $card->formatted_expiry,
-                                   'is_default' => $card->is_default,
-                                   'is_expired' => $card->is_expired,
-                               ];
-                           });
+            ->orderBy('is_default', 'desc')
+            ->get()
+            ->map(function ($card) {
+                return [
+                    'id' => $card->id,
+                    'registration_id' => $card->registration_id,
+                    'card_type' => $card->card_type,
+                    'masked_number' => $card->masked_card_number,
+                    'card_holder' => $card->card_holder_name,
+                    'expiry' => $card->formatted_expiry,
+                    'is_default' => $card->is_default,
+                    'is_expired' => $card->is_expired,
+                ];
+            });
 
         return response()->json([
             'success' => true,
@@ -304,7 +303,7 @@ class CreditCardController extends Controller
         $user = $request->user();
         $creditCard = $user->getCreditCardByRegistrationId($registrationId);
 
-        if (!$creditCard) {
+        if (! $creditCard) {
             return response()->json([
                 'success' => false,
                 'error' => 'Credit card not found',

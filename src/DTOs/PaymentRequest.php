@@ -43,6 +43,6 @@ class PaymentRequest
             'merchantTransactionId' => $this->merchantTransactionId,
             'createRegistration' => $this->createRegistration,
             'registrationId' => $this->registrationId,
-        ], fn($value) => $value !== null);
+        ], fn ($value) => $value !== null);
     }
 }

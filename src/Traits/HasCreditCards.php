@@ -53,7 +53,7 @@ trait HasCreditCards
      */
     public function saveCreditCardFromResponse(array $response, array $cardInfo = []): ?\AhmadChebbo\LaravelHyperpay\Models\CreditCard
     {
-        if (!isset($response['registrationId'])) {
+        if (! isset($response['registrationId'])) {
             return null;
         }
 
@@ -85,9 +85,9 @@ trait HasCreditCards
     public function getCreditCardByRegistrationId(string $registrationId): ?\AhmadChebbo\LaravelHyperpay\Models\CreditCard
     {
         return $this->creditCards()
-                   ->where('registration_id', $registrationId)
-                   ->active()
-                   ->first();
+            ->where('registration_id', $registrationId)
+            ->active()
+            ->first();
     }
 
     /**

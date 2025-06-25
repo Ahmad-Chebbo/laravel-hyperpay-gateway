@@ -110,7 +110,7 @@ class HyperPayService
         $this->validateBrand($request->brand);
 
         // If registrationId is provided, do not require card data
-        if (!$request->registrationId) {
+        if (! $request->registrationId) {
             $this->validateCardData($request);
         }
 

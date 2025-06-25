@@ -1,9 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use AhmadChebbo\LaravelHyperpay\Http\Controllers\CreditCardController;
 use AhmadChebbo\LaravelHyperpay\Http\Controllers\PaymentController;
 use AhmadChebbo\LaravelHyperpay\Http\Controllers\WebhookController;
-use AhmadChebbo\LaravelHyperpay\Http\Controllers\CreditCardController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------

@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace AhmadChebbo\LaravelHyperpay\Tests\Unit;
 
-use Tests\TestCase;
-use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
-use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
-use AhmadChebbo\LaravelHyperpay\DTOs\CustomerData;
 use AhmadChebbo\LaravelHyperpay\DTOs\BillingData;
+use AhmadChebbo\LaravelHyperpay\DTOs\CheckoutRequest;
+use AhmadChebbo\LaravelHyperpay\DTOs\CustomerData;
+use AhmadChebbo\LaravelHyperpay\DTOs\PaymentRequest;
 use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidAmountException;
 use AhmadChebbo\LaravelHyperpay\Exceptions\InvalidBrandException;
-use Illuminate\Support\Facades\Http;
+use AhmadChebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Http;
+use Tests\TestCase;
 
 class HyperPayServiceTest extends TestCase
 {
@@ -33,7 +33,7 @@ class HyperPayServiceTest extends TestCase
         Config::set('hyperpay.currency', 'SAR');
         Config::set('hyperpay.payment_type', 'DB');
 
-        $this->service = new HyperPayService();
+        $this->service = new HyperPayService;
     }
 
     /** @test */
@@ -95,7 +95,7 @@ class HyperPayServiceTest extends TestCase
                 'id' => 'test_payment_123',
                 'result' => [
                     'code' => '000.100.110',
-                    'description' => 'Request successfully processed'
+                    'description' => 'Request successfully processed',
                 ],
                 'amount' => '100.00',
                 'currency' => 'SAR',
@@ -129,7 +129,7 @@ class HyperPayServiceTest extends TestCase
                 'id' => 'test_payment_123',
                 'result' => [
                     'code' => '000.100.110',
-                    'description' => 'Request successfully processed'
+                    'description' => 'Request successfully processed',
                 ],
                 'amount' => '100.00',
                 'currency' => 'SAR',
@@ -153,7 +153,7 @@ class HyperPayServiceTest extends TestCase
                 'id' => 'test_refund_123',
                 'result' => [
                     'code' => '000.100.110',
-                    'description' => 'Refund processed successfully'
+                    'description' => 'Refund processed successfully',
                 ],
                 'amount' => '50.00',
                 'currency' => 'SAR',
@@ -181,7 +181,7 @@ class HyperPayServiceTest extends TestCase
                 'id' => 'test_capture_123',
                 'result' => [
                     'code' => '000.100.110',
-                    'description' => 'Payment captured successfully'
+                    'description' => 'Payment captured successfully',
                 ],
                 'amount' => '100.00',
                 'currency' => 'SAR',
@@ -208,7 +208,7 @@ class HyperPayServiceTest extends TestCase
                 'id' => 'test_reverse_123',
                 'result' => [
                     'code' => '000.100.110',
-                    'description' => 'Payment reversed successfully'
+                    'description' => 'Payment reversed successfully',
                 ],
                 'amount' => '100.00',
                 'currency' => 'SAR',
@@ -253,8 +253,8 @@ class HyperPayServiceTest extends TestCase
             'https://eu-test.oppwa.com/v1/checkouts' => Http::response([
                 'result' => [
                     'code' => '800.400.500',
-                    'description' => 'Invalid request'
-                ]
+                    'description' => 'Invalid request',
+                ],
             ], 400),
         ]);
 
@@ -332,6 +332,7 @@ class HyperPayServiceTest extends TestCase
 
         Http::assertSent(function ($request) {
             $data = $request->data();
+
             return $data['givenName'] === 'John' &&
                    $data['surname'] === 'Doe' &&
                    $data['email'] === 'john.doe@example.com' &&
@@ -366,6 +367,7 @@ class HyperPayServiceTest extends TestCase
 
         Http::assertSent(function ($request) {
             $data = $request->data();
+
             return $data['billing.street1'] === 'King Fahd Road' &&
                    $data['billing.city'] === 'Riyadh' &&
                    $data['billing.state'] === 'Riyadh' &&
