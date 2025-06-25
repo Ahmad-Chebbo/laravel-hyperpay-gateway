@@ -22,6 +22,8 @@ class CheckoutRequest
         public ?ShippingData $shipping = null,
         public ?array $customParameters = null,
         public ?array $riskParameters = null,
+        public ?bool $createRegistration = null,
+        public ?string $registrationId = null,
     ) {}
 
     public function toArray(): array
@@ -32,6 +34,8 @@ class CheckoutRequest
             'currency' => $this->currency,
             'paymentType' => $this->paymentType,
             'merchantTransactionId' => $this->merchantTransactionId,
+            'createRegistration' => $this->createRegistration,
+            'registrationId' => $this->registrationId,
         ], fn($value) => $value !== null);
     }
 }

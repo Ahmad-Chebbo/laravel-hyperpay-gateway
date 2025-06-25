@@ -77,9 +77,22 @@ class HyperPayService
             $params = array_merge($params, $request->riskParameters);
         }
 
+        // Card tokenization support
+        if ($request->createRegistration !== null) {
+            $params['createRegistration'] = $request->createRegistration ? 'true' : 'false';
+        }
+        if ($request->registrationId) {
+            $params['registrationId'] = $request->registrationId;
+        }
+
         $response = $this->makeRequest('POST', '/v1/checkouts', $params);
 
         $this->logTransaction('checkout', $params, $response);
+
+        // Attach registrationId if present
+        if (isset($response['registrationId'])) {
+            $response['card_token'] = $response['registrationId'];
+        }
 
         return new CheckoutResponse($response);
     }
@@ -91,7 +104,11 @@ class HyperPayService
     {
         $this->validateAmount($request->amount);
         $this->validateBrand($request->brand);
-        $this->validateCardData($request);
+
+        // If registrationId is provided, do not require card data
+        if (!$request->registrationId) {
+            $this->validateCardData($request);
+        }
 
         $entityId = $this->getEntityId($request->brand);
 
@@ -101,16 +118,27 @@ class HyperPayService
             'currency' => $request->currency ?? $this->config['currency'],
             'paymentType' => $request->paymentType ?? $this->config['payment_type'],
             'paymentBrand' => $request->brand,
-            'card.number' => $request->cardNumber,
-            'card.holder' => $request->cardHolder,
-            'card.expiryMonth' => str_pad($request->expiryMonth, 2, '0', STR_PAD_LEFT),
-            'card.expiryYear' => $request->expiryYear,
-            'card.cvv' => $request->cvv,
             'merchantTransactionId' => $request->merchantTransactionId ?? uniqid('hyperpay_'),
         ];
 
+        // Card data or registrationId
+        if ($request->registrationId) {
+            $params['registrationId'] = $request->registrationId;
+        } else {
+            $params['card.number'] = $request->cardNumber;
+            $params['card.holder'] = $request->cardHolder;
+            $params['card.expiryMonth'] = str_pad($request->expiryMonth, 2, '0', STR_PAD_LEFT);
+            $params['card.expiryYear'] = $request->expiryYear;
+            $params['card.cvv'] = $request->cvv;
+        }
+
+        // Tokenization
+        if ($request->createRegistration !== null) {
+            $params['createRegistration'] = $request->createRegistration ? 'true' : 'false';
+        }
+
         // Add result URLs
-        if ($request->shopperResultUrl) {
+        if (property_exists($request, 'shopperResultUrl') && $request->shopperResultUrl) {
             $params['shopperResultUrl'] = $request->shopperResultUrl;
         } elseif ($this->config['customization']['result_url']) {
             $params['shopperResultUrl'] = $this->config['customization']['result_url'];
@@ -137,6 +165,11 @@ class HyperPayService
         $response = $this->makeRequest('POST', '/v1/payments', $params);
 
         $this->logTransaction('payment', $params, $response);
+
+        // Attach registrationId if present
+        if (isset($response['registrationId'])) {
+            $response['card_token'] = $response['registrationId'];
+        }
 
         return new PaymentResponse($response);
     }

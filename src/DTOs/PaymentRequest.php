@@ -10,21 +10,20 @@ class PaymentRequest
     public function __construct(
         public float $amount,
         public string $brand,
-        public string $cardNumber,
-        public string $cardHolder,
-        public string $expiryMonth,
-        public string $expiryYear,
-        public string $cvv,
+        public ?string $cardNumber = null,
+        public ?string $cardHolder = null,
+        public ?int $expiryMonth = null,
+        public ?int $expiryYear = null,
+        public ?string $cvv = null,
         public ?string $currency = null,
         public ?string $paymentType = null,
         public ?string $merchantTransactionId = null,
-        public ?string $shopperResultUrl = null,
         public ?CustomerData $customer = null,
         public ?BillingData $billing = null,
         public ?ShippingData $shipping = null,
         public ?array $threeDSecure = null,
-        public ?array $customParameters = null,
-        public ?array $riskParameters = null,
+        public ?bool $createRegistration = null,
+        public ?string $registrationId = null,
     ) {}
 
     public function toArray(): array
@@ -40,7 +39,8 @@ class PaymentRequest
             'currency' => $this->currency,
             'paymentType' => $this->paymentType,
             'merchantTransactionId' => $this->merchantTransactionId,
-            'shopperResultUrl' => $this->shopperResultUrl,
+            'createRegistration' => $this->createRegistration,
+            'registrationId' => $this->registrationId,
         ], fn($value) => $value !== null);
     }
 }

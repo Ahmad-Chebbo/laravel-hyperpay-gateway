@@ -46,7 +46,7 @@ class HyperPayInstallCommand extends Command
         $this->info('Publishing configuration...');
 
         $this->callSilent('vendor:publish', [
-            '--provider' => 'YourVendor\LaravelHyperPay\HyperPayServiceProvider',
+            '--provider' => 'AhmadChebbo\LaravelHyperpay\HyperPayServiceProvider',
             '--tag' => 'hyperpay-config',
             '--force' => $this->option('force'),
         ]);
@@ -57,7 +57,7 @@ class HyperPayInstallCommand extends Command
         $this->info('Publishing migrations...');
 
         $this->callSilent('vendor:publish', [
-            '--provider' => 'YourVendor\LaravelHyperPay\HyperPayServiceProvider',
+            '--provider' => 'AhmadChebbo\LaravelHyperpay\HyperPayServiceProvider',
             '--tag' => 'hyperpay-migrations',
             '--force' => $this->option('force'),
         ]);
@@ -68,7 +68,7 @@ class HyperPayInstallCommand extends Command
         $this->info('Publishing views...');
 
         $this->callSilent('vendor:publish', [
-            '--provider' => 'YourVendor\LaravelHyperPay\HyperPayServiceProvider',
+            '--provider' => 'AhmadChebbo\LaravelHyperpay\HyperPayServiceProvider',
             '--tag' => 'hyperpay-views',
             '--force' => $this->option('force'),
         ]);

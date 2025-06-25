@@ -31,26 +31,30 @@ class HyperpayServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Publish config file
-        $this->publishes([
-            __DIR__.'/../config/hyperpay.php' => config_path('hyperpay.php'),
-        ], 'hyperpay-config');
+        $this->loadMigrationsFrom(__DIR__ . '/../database/migrations');
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'hyperpay');
 
-        // Publish migration files
-        $this->publishes([
-            __DIR__.'/../database/migrations' => database_path('migrations'),
-        ], 'hyperpay-migrations');
+        if ($this->app->runningInConsole()) {
+            $this->publishes([
+                __DIR__ . '/../config/hyperpay.php' => config_path('hyperpay.php'),
+            ], 'hyperpay-config');
+
+            $this->publishes([
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
+            ], 'hyperpay-migrations');
+
+            $this->publishes([
+                __DIR__ . '/../resources/views' => resource_path('views/vendor/hyperpay'),
+            ], 'hyperpay-views');
+
+            $this->commands([
+                Commands\HyperPayInstallCommand::class,
+                Commands\HyperPayStatusCommand::class,
+            ]);
+        }
 
         // Load routes
-        $this->loadRoutesFrom(__DIR__.'/../routes/web.php');
-
-        // Load views
-        $this->loadViewsFrom(__DIR__.'/../resources/views', 'hyperpay');
-
-        // Publish views
-        $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/hyperpay'),
-        ], 'hyperpay-views');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/hyperpay.php');
 
         // Load translations
         $this->loadTranslationsFrom(__DIR__.'/../lang', 'hyperpay');
@@ -59,13 +63,5 @@ class HyperpayServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../lang' => resource_path('lang/vendor/hyperpay'),
         ], 'hyperpay-lang');
-
-        // Register commands
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                // Console\Commands\HyperPayInstallCommand::class,
-                // Console\Commands\HyperPayStatusCommand::class,
-            ]);
-        }
     }
 }
