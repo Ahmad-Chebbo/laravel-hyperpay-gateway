@@ -1,9 +1,9 @@
 <?php
 
-namespace Ahmad-Chebbo\LaravelHyperpay;
+namespace AhmadShebbo\LaravelHyperpay;
 
-use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
-use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayService;
+use AhmadShebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
+use AhmadShebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Support\ServiceProvider;
 
 class HyperpayServiceProvider extends ServiceProvider

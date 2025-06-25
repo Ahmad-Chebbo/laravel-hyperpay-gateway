@@ -1,9 +1,9 @@
 # Laravel HyperPay Integration
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/Ahmad-Chebbo/laravel-hyperpay.svg?style=flat-square)](https://packagist.org/packages/Ahmad-Chebbo/laravel-hyperpay)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/Ahmad-Chebbo/laravel-hyperpay/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/Ahmad-Chebbo/laravel-hyperpay/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/Ahmad-Chebbo/laravel-hyperpay/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/Ahmad-Chebbo/laravel-hyperpay/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/Ahmad-Chebbo/laravel-hyperpay.svg?style=flat-square)](https://packagist.org/packages/Ahmad-Chebbo/laravel-hyperpay)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/AhmadShebbo/laravel-hyperpay.svg?style=flat-square)](https://packagist.org/packages/AhmadShebbo/laravel-hyperpay)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/AhmadShebbo/laravel-hyperpay/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/AhmadShebbo/laravel-hyperpay/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/AhmadShebbo/laravel-hyperpay/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/AhmadShebbo/laravel-hyperpay/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/AhmadShebbo/laravel-hyperpay.svg?style=flat-square)](https://packagist.org/packages/AhmadShebbo/laravel-hyperpay)
 
 A comprehensive Laravel package for integrating HyperPay payment gateway. This package provides a seamless integration with HyperPay's payment processing services, supporting multiple payment brands (VISA, MasterCard, MADA, Apple Pay, STC Pay) with webhook handling, payment status checking, and comprehensive error handling.
 
@@ -82,7 +82,7 @@ A comprehensive Laravel package for integrating HyperPay payment gateway. This p
 You can install the package via composer:
 
 ```bash
-composer require ahmad-chebbo/laravel-hyperpay
+composer require AhmadShebbo/laravel-hyperpay
 ```
 
 ### Quick Installation
@@ -105,17 +105,17 @@ If you prefer manual installation, follow these steps:
 
 1. **Publish the configuration file:**
 ```bash
-php artisan vendor:publish --provider="Ahmad-Chebbo\LaravelHyperpay\HyperPayServiceProvider" --tag="hyperpay-config"
+php artisan vendor:publish --provider="AhmadShebbo\LaravelHyperpay\HyperPayServiceProvider" --tag="hyperpay-config"
 ```
 
 2. **Publish migrations:**
 ```bash
-php artisan vendor:publish --provider="Ahmad-Chebbo\LaravelHyperpay\HyperPayServiceProvider" --tag="hyperpay-migrations"
+php artisan vendor:publish --provider="AhmadShebbo\LaravelHyperpay\HyperPayServiceProvider" --tag="hyperpay-migrations"
 ```
 
 3. **Publish views (optional):**
 ```bash
-php artisan vendor:publish --provider="Ahmad-Chebbo\LaravelHyperpay\HyperPayServiceProvider" --tag="hyperpay-views"
+php artisan vendor:publish --provider="AhmadShebbo\LaravelHyperpay\HyperPayServiceProvider" --tag="hyperpay-views"
 ```
 
 4. **Run migrations:**
@@ -199,10 +199,10 @@ The configuration file is located at `config/hyperpay.php`. You can customize va
 #### Using the Facade
 
 ```php
-use Ahmad-Chebbo\LaravelHyperpay\Facades\HyperPay;
-use Ahmad-Chebbo\LaravelHyperpay\DTOs\CheckoutRequest;
-use Ahmad-Chebbo\LaravelHyperpay\DTOs\CustomerData;
-use Ahmad-Chebbo\LaravelHyperpay\DTOs\BillingData;
+use AhmadShebbo\LaravelHyperpay\Facades\HyperPay;
+use AhmadShebbo\LaravelHyperpay\DTOs\CheckoutRequest;
+use AhmadShebbo\LaravelHyperpay\DTOs\CustomerData;
+use AhmadShebbo\LaravelHyperpay\DTOs\BillingData;
 
 // Create a checkout session
 $checkoutRequest = new CheckoutRequest(
@@ -234,7 +234,7 @@ return redirect($response->redirectUrl);
 #### Using Dependency Injection
 
 ```php
-use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayService;
+use AhmadShebbo\LaravelHyperpay\Services\HyperPayService;
 
 class PaymentController extends Controller
 {
@@ -327,13 +327,13 @@ The package dispatches various events that you can listen to:
 ```php
 // In your EventServiceProvider
 protected $listen = [
-    'Ahmad-Chebbo\LaravelHyperpay\Events\PaymentSuccessful' => [
+    'AhmadShebbo\LaravelHyperpay\Events\PaymentSuccessful' => [
         'App\Listeners\HandleSuccessfulPayment',
     ],
-    'Ahmad-Chebbo\LaravelHyperpay\Events\PaymentFailed' => [
+    'AhmadShebbo\LaravelHyperpay\Events\PaymentFailed' => [
         'App\Listeners\HandleFailedPayment',
     ],
-    'Ahmad-Chebbo\LaravelHyperpay\Events\PaymentPending' => [
+    'AhmadShebbo\LaravelHyperpay\Events\PaymentPending' => [
         'App\Listeners\HandlePendingPayment',
     ],
 ];
@@ -427,7 +427,7 @@ The package supports card tokenization for secure recurring payments and one-cli
 
 #### Payment Model
 ```php
-use Ahmad-Chebbo\LaravelHyperpay\Models\Payment;
+use AhmadShebbo\LaravelHyperpay\Models\Payment;
 
 // Create payment record
 Payment::create([
@@ -444,7 +444,7 @@ Payment::create([
 
 #### CreditCard Model
 ```php
-use Ahmad-Chebbo\LaravelHyperpay\Models\CreditCard;
+use AhmadShebbo\LaravelHyperpay\Models\CreditCard;
 
 // Credit card with morphable relationships
 $creditCard = CreditCard::create([
@@ -465,8 +465,8 @@ $creditCard = CreditCard::create([
 Add the traits to your User model:
 
 ```php
-use Ahmad-Chebbo\LaravelHyperpay\Traits\HasPayments;
-use Ahmad-Chebbo\LaravelHyperpay\Traits\HasCreditCards;
+use AhmadShebbo\LaravelHyperpay\Traits\HasPayments;
+use AhmadShebbo\LaravelHyperpay\Traits\HasCreditCards;
 
 class User extends Authenticatable
 {
@@ -484,8 +484,8 @@ class User extends Authenticatable
 
 #### One-Time Payment with Tokenization
 ```php
-use Ahmad-Chebbo\LaravelHyperpay\Facades\HyperPay;
-use Ahmad-Chebbo\LaravelHyperpay\DTOs\PaymentRequest;
+use AhmadShebbo\LaravelHyperpay\Facades\HyperPay;
+use AhmadShebbo\LaravelHyperpay\DTOs\PaymentRequest;
 
 // Process payment and request tokenization
 $paymentRequest = new PaymentRequest(
@@ -706,7 +706,7 @@ Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## Credits
 
-- [Ahmad Chebbo](https://github.com/ahmad-chebbo)
+- [Ahmad Chebbo](https://github.com/AhmadShebbo)
 - [All Contributors](../../contributors)
 
 ## License

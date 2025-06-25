@@ -1,9 +1,9 @@
 <?php
 
-namespace Ahmad-Chebbo\LaravelHyperpay\Services;
+namespace AhmadShebbo\LaravelHyperpay\Services;
 
-use Ahmad-Chebbo\LaravelHyperpay\Events\PaymentStatusChanged;
-use Ahmad-Chebbo\LaravelHyperpay\Exceptions\WebhookVerificationException;
+use AhmadShebbo\LaravelHyperpay\Events\PaymentStatusChanged;
+use AhmadShebbo\LaravelHyperpay\Exceptions\WebhookVerificationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 

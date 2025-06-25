@@ -1,8 +1,8 @@
 {
-    "name": "ahmad-chebbo/laravel-hyperpay",
+    "name": "AhmadShebbo/laravel-hyperpay",
     "description": "Laravel Hyperpay Gateway",
     "keywords": ["laravel", "payment", "hyperpay", "gateway", "saudi", "mada", "visa", "mastercard"],
-    "homepage": "https://github.com/ahmad-chebbo/laravel-hyperpay",
+    "homepage": "https://github.com/AhmadShebbo/laravel-hyperpay",
     "license": "MIT",
     "authors": [
         {
@@ -31,12 +31,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Ahmad-Chebbo\\LaravelHyperpay\\": "src/"
+            "AhmadShebbo\\LaravelHyperpay\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Ahmad-Chebbo\\LaravelHyperpay\\Tests\\": "tests/",
+            "AhmadShebbo\\LaravelHyperpay\\Tests\\": "tests/",
             "Workbench\\App\\": "workbench/app/"
         }
     },
@@ -58,10 +58,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Ahmad-Chebbo\\LaravelHyperpay\\HyperpayServiceProvider"
+                "AhmadShebbo\\LaravelHyperpay\\HyperpayServiceProvider"
             ],
             "aliases": {
-                "Hyperpay": "Ahmad-Chebbo\\LaravelHyperpay\\Facades\\Hyperpay"
+                "Hyperpay": "AhmadShebbo\\LaravelHyperpay\\Facades\\Hyperpay"
             }
         }
     },

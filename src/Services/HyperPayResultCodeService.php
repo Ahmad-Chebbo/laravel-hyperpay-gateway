@@ -1,6 +1,6 @@
 <?php
 
-namespace Ahmad-Chebbo\LaravelHyperpay\Services;
+namespace AhmadShebbo\LaravelHyperpay\Services;
 
 class HyperPayResultCodeService
 {

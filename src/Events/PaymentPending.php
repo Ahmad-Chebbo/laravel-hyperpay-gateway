@@ -1,6 +1,6 @@
 <?php
 
-namespace Ahmad-Chebbo\LaravelHyperpay\Events;
+namespace AhmadShebbo\LaravelHyperpay\Events;
 
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Ahmad-Chebbo\LaravelHyperpay\Console\Commands;
+namespace AhmadShebbo\LaravelHyperpay\Console\Commands;
 
-use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
-use Ahmad-Chebbo\LaravelHyperpay\Services\HyperPayService;
+use AhmadShebbo\LaravelHyperpay\Services\HyperPayResultCodeService;
+use AhmadShebbo\LaravelHyperpay\Services\HyperPayService;
 use Illuminate\Console\Command;
 
 class HyperPayStatusCommand extends Command
